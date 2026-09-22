@@ -21,6 +21,7 @@ import app.k9mail.feature.launcher.FeatureLauncherTarget
 import com.fsck.k9.ui.R
 import com.fsck.k9.ui.base.livedata.observeNotNull
 import com.fsck.k9.ui.settings.account.AccountSettingsActivity
+import com.fsck.k9.ui.settings.mcp.McpSettingsActivity
 import com.fsck.k9.view.DraggableFrameLayout
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.GenericItem
@@ -96,6 +97,12 @@ class SettingsListFragment : Fragment(), ItemTouchCallback {
                 text = getString(R.string.general_settings_title),
                 navigationAction = R.id.action_settingsListScreen_to_generalSettingsScreen,
                 icon = Icons.Outlined.Settings,
+            )
+
+            addIntent(
+                text = "MCP",
+                icon = Icons.Outlined.Sync,
+                intent = Intent(requireContext(), McpSettingsActivity::class.java),
             )
 
             addSection(title = getString(R.string.accounts_title)) {

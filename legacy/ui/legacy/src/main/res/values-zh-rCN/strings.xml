@@ -952,4 +952,22 @@
     <string name="account_settings_signature_is_html_summary">将签名解析为 HTML。出于安全考虑，脚本和事件处理程序将被移除。</string>
     <string name="camera_capture_lost">由于应用已关闭，捕获的图片已丢失。请重试。</string>
     <string name="message_compose_encrypting_message">正在加密邮件…</string>
+    <string name="mcp_server_title">MCP 服务器</string>
+    <string name="mcp_server_summary_stopped">MCP 服务器已停止</string>
+    <string name="mcp_server_summary_running">MCP 服务器正在运行</string>
+    <string name="mcp_address_title">HTTP 地址</string>
+    <string name="mcp_address_summary_not_running">未运行</string>
+    <string name="mcp_address_copied">已复制：%1$s</string>
+    <string name="mcp_port_title">端口</string>
+    <string name="mcp_port_dialog_title">MCP 端口</string>
+    <string name="mcp_port_invalid">端口无效（1-65535）</string>
+    <string name="mcp_port_change_requires_restart">修改端口需要重启，请先停止 MCP 服务器。</string>
+    <string name="mcp_status_title">状态</string>
+    <string name="mcp_status_stopped">已停止</string>
+    <string name="mcp_status_starting">正在启动…</string>
+    <string name="mcp_status_running">运行中（端口 %1$d）</string>
+    <string name="mcp_status_failed">启动失败：%1$s</string>
+    <string name="mcp_auto_start_title">启动应用时自动打开 MCP 服务器</string>
+    <string name="mcp_auto_start_summary">每次启动应用时自动开启 MCP 服务器</string>
+    <string name="mcp_notification_action_stop">关闭</string>
 </resources>

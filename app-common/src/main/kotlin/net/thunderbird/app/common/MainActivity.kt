@@ -3,6 +3,8 @@ package net.thunderbird.app.common
 import android.os.Bundle
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.lifecycleScope
+import com.fsck.k9.mcp.McpPreferences
+import com.fsck.k9.mcp.McpService
 import com.fsck.k9.ui.base.BaseActivity
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -24,6 +26,7 @@ class MainActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         val splashScreen = installSplashScreen()
         super.onCreate(savedInstanceState)
+        startMcpServerIfEnabled()
         featureFlagProvider
             .state
             .onEach { state ->
@@ -44,6 +47,19 @@ class MainActivity : BaseActivity() {
         splashScreen.setKeepOnScreenCondition {
             logger.verbose { "[feature-flag] keep on screen; ready = $ready" }
             !ready
+        }
+    }
+
+    /**
+     * Starts the MCP server on app launch when the user enabled "start MCP server when app starts".
+     *
+     * The running check is process-local ([McpPreferences.isServerRunning]), so a fresh process
+     * correctly reports "not running" even if the previous process was killed while the server was
+     * up — otherwise the stale value would make this method skip the start.
+     */
+    private fun startMcpServerIfEnabled() {
+        if (McpPreferences.isAutoStartEnabled(this) && !McpPreferences.isServerRunning()) {
+            McpService.start(this, McpPreferences.getPort(this))
         }
     }
 }

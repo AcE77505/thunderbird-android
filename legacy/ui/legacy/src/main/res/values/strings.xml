@@ -1160,4 +1160,22 @@ You can keep this message and use it as a backup for your secret key. If you wan
     <string name="debug_invalidate_access_token_already_modified">Stored access token already modified.</string>
     <string name="debug_feature_flags">DEBUG: Feature Flags</string>
     <string name="no_network_message_will_be_sent_later_toast">Offline. Message will be sent once connection is available</string>
+    <string name="mcp_server_title">MCP server</string>
+    <string name="mcp_server_summary_stopped">MCP server is stopped</string>
+    <string name="mcp_server_summary_running">MCP server is running</string>
+    <string name="mcp_address_title">HTTP address</string>
+    <string name="mcp_address_summary_not_running">Not running</string>
+    <string name="mcp_address_copied">Copied: %1$s</string>
+    <string name="mcp_port_title">Port</string>
+    <string name="mcp_port_dialog_title">MCP port</string>
+    <string name="mcp_port_invalid">Invalid port (1-65535)</string>
+    <string name="mcp_port_change_requires_restart">Port change requires restart. Stop MCP first.</string>
+    <string name="mcp_status_title">Status</string>
+    <string name="mcp_status_stopped">Stopped</string>
+    <string name="mcp_status_starting">Starting…</string>
+    <string name="mcp_status_running">Running on port %1$d</string>
+    <string name="mcp_status_failed">Failed: %1$s</string>
+    <string name="mcp_auto_start_title">Start MCP server when app starts</string>
+    <string name="mcp_auto_start_summary">Automatically start the MCP server every time the app is launched</string>
+    <string name="mcp_notification_action_stop">Stop</string>
 </resources>

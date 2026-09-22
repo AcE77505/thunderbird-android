@@ -1,5 +1,6 @@
 package net.thunderbird.feature.search.legacy.sql
 
+import net.thunderbird.feature.search.legacy.CjkTokenizerUtil
 import net.thunderbird.feature.search.legacy.SearchConditionTreeNode
 import net.thunderbird.feature.search.legacy.api.SearchAttribute
 import net.thunderbird.feature.search.legacy.api.SearchCondition
@@ -81,7 +82,12 @@ class SqlWhereClause private constructor(
                         "Custom field has no query template!"
                     }
                     query.append(condition.field.customQueryTemplate)
-                    selectionArgs.add(condition.value)
+                    // Pre-process the query exactly like the indexer does (see SaveMessageOperations):
+                    // CJK characters become individual tokens and digit/letter runs are split, so a
+                    // search for "2583" matches content indexed from "2583gaq".
+                    selectionArgs.add(
+                        CjkTokenizerUtil.spaceCjkText(condition.value, aggressiveDigitSplit = true),
+                    )
                 } else {
                     appendCondition(condition, query, selectionArgs)
                 }

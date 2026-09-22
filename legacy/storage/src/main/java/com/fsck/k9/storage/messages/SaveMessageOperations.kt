@@ -31,6 +31,7 @@ import java.util.UUID
 import net.thunderbird.core.common.mail.Flag
 import net.thunderbird.feature.account.AccountId
 import net.thunderbird.feature.mail.message.list.LocalMessageUidPrefixProvider
+import net.thunderbird.feature.search.legacy.CjkTokenizerUtil
 import org.apache.commons.io.IOUtils
 import org.apache.james.mime4j.codec.Base64InputStream
 import org.apache.james.mime4j.codec.QuotedPrintableInputStream
@@ -435,7 +436,10 @@ internal class SaveMessageOperations(
     }
 
     private fun createOrReplaceFulltextEntry(database: SQLiteDatabase, messageId: Long, messageData: SaveMessageData) {
-        val fulltext = messageData.textForSearchIndex ?: return
+        val rawFulltext = messageData.textForSearchIndex ?: return
+        // CJK spacing plus digit/letter splitting: "2583gaq$@$新密码" is indexed as
+        // "2583 gaq$@$新 密 码" so that "2583" alone is searchable.
+        val fulltext = CjkTokenizerUtil.spaceCjkText(rawFulltext, aggressiveDigitSplit = true)
 
         val values = ContentValues().apply {
             put("docid", messageId)
